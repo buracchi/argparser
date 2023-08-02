@@ -1,0 +1,48 @@
+name: Build Ubuntu
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build_x64_Debug:
+    runs-on: ubuntu-22.04
+
+    steps:
+    - uses: actions/checkout@v3.5.3
+      with:
+        submodules: recursive
+
+    - name: Installs CMake and Ninja
+      uses: lukka/get-cmake@v3.27.1
+
+    - name: Configure CMake
+      run: cmake --preset x64-linux-debug
+
+    - name: Build
+      run: cmake --build --preset x64-linux-debug -j $(nproc)
+
+    - name: Test
+      run: ctest --preset x64-linux-debug
+
+  build_x64_Release:
+    runs-on: ubuntu-22.04
+
+    steps:
+    - uses: actions/checkout@v3.5.3
+      with:
+        submodules: recursive
+
+    - name: Installs CMake and Ninja
+      uses: lukka/get-cmake@v3.27.1
+
+    - name: Configure CMake
+      run: cmake --preset x64-linux-release
+
+    - name: Build
+      run: cmake --build --preset x64-linux-release -j $(nproc)
+
+    - name: Test
+      run: ctest --preset x64-linux-release

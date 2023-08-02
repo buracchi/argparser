@@ -1,0 +1,16 @@
+{
+  "name": "argparser",
+  "description": "Parser for command-line options, arguments and sub-commands.",
+  "version": "0.1",
+  "dependencies": [
+    {
+      "name": "libcommon"
+    }
+  ],
+  "features": {
+    "tests": {
+      "description": "Build Tests",
+      "dependencies": [ "gtest" ]
+    }
+  }
+}
