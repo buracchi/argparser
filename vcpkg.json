@@ -10,7 +10,7 @@
   "features": {
     "tests": {
       "description": "Build Tests",
-      "dependencies": [ "gtest" ]
+      "dependencies": [ "cutest" ]
     }
   }
 }

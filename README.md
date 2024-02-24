@@ -24,16 +24,12 @@ The `argparser_add_argument()` macro attaches individual argument specifications
 It supports positional arguments, options that accept values, and on/off flags:
 
 ```c
-char* filename = NULL;
-int count = NULL;
+char* filename = nullptr;
+int count = nullptr;
 bool verbose = false;
 argparser_add_argument(parser, &filename, { .name = "filename" });
 argparser_add_argument(parser, &count, { .flag = "c", .long_flag = "count" });
-argparser_add_argument_action_store_true(parser, 
-                                         &verbose, 
-                                         { .flag = "v", 
-                                           .long_flag = "verbose" 
-                                         });
+argparser_add_argument_action_store_true(parser, &verbose, { .flag = "v", .long_flag = "verbose" });
 ```
 
 The `argparser_parse_args()` function runs the parser and places the extracted data in the declared memory positions:

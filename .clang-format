@@ -61,7 +61,7 @@ PenaltyBreakString: 10
 PenaltyExcessCharacter: 1
 PenaltyReturnTypeOnItsOwnLine: 60
 PointerAlignment: Right
-QualifierAlignment: Right
+QualifierAlignment: Left
 ReflowComments: true
 SeparateDefinitionBlocks: Always
 SortUsingDeclarations: false

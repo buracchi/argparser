@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.24)
+cmake_minimum_required(VERSION 3.27)
 
 option(ARGPARSER_BUILD_TESTS "Build tests" ON)
 option(ARGPARSER_ENABLE_TEST_COVERAGE "Enable coverage reporting" OFF)
@@ -10,17 +10,14 @@ endif ()
 
 project(argparser
         DESCRIPTION "Parser for command-line options, arguments and sub-commands."
-        LANGUAGES C CXX
+        LANGUAGES C
         VERSION 0.1)
 
 set(CMAKE_DISABLE_SOURCE_CHANGES ON)
 set(CMAKE_DISABLE_IN_SOURCE_BUILD ON)
 set(CMAKE_C_STANDARD_REQUIRED ON)
-set(CMAKE_C_STANDARD 17)
+set(CMAKE_C_STANDARD 23)
 set(CMAKE_C_EXTENSIONS OFF)
-set(CMAKE_CXX_STANDARD 20)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_CXX_EXTENSIONS OFF)
 
 if (ARGPARSER_INSTALL)
     include(GNUInstallDirs)
@@ -28,9 +25,8 @@ if (ARGPARSER_INSTALL)
 endif ()
 
 if (ARGPARSER_BUILD_TESTS)
+    include(CTest)
     enable_testing()
-    include(GoogleTest)
-    find_package(GTest CONFIG REQUIRED)
 endif ()
 
 add_library(coverage_config INTERFACE)
@@ -60,8 +56,12 @@ endif ()
 find_package(buracchi-common CONFIG REQUIRED)
 
 add_library(argparser STATIC
+            "src/actions.c"
             "src/argparser.c"
+            "src/arguments.c"
+            "src/help.c"
             "src/parser.c"
+            "src/subcommands.c"
             "src/usage.c"
             "src/utils.c")
 target_include_directories(argparser PUBLIC

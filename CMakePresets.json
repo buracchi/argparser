@@ -49,7 +49,10 @@
       "name": "default",
       "hidden": true,
       "description": "Default configuration presets",
-      "inherits": [ "ninja", "vcpkg" ],
+      "inherits": [
+        "ninja",
+        "vcpkg"
+      ],
       "binaryDir": "${sourceDir}/out/build/${presetName}",
       "installDir": "${sourceDir}/out/install/${presetName}"
     },
@@ -59,7 +62,10 @@
       "inherits": "default",
       "cacheVariables": {
         "CMAKE_C_COMPILER": "clang-cl",
-        "CMAKE_CXX_COMPILER": "clang-cl"
+        "VCPKG_TARGET_TRIPLET": {
+          "value": "x64-windows-llvm",
+          "type": "FILEPATH"
+        }
       },
       "condition": {
         "type": "equals",
@@ -83,7 +89,9 @@
       },
       "vendor": {
         "microsoft.com/VisualStudioSettings/CMake/1.0": {
-          "hostOS": [ "Linux" ]
+          "hostOS": [
+            "Linux"
+          ]
         },
         "microsoft.com/VisualStudioRemoteSettings/CMake/1.0": {
           "sourceDir": "$env{HOME}/.vs/${sourceDirName}",
@@ -97,37 +105,45 @@
     {
       "name": "x64-windows-debug",
       "displayName": "x64 Debug",
-      "inherits": [ "windows-default", "x64-debug" ],
+      "inherits": [
+        "windows-default",
+        "x64-debug"
+      ],
       "cacheVariables": {
-        "CMAKE_C_FLAGS_DEBUG": "/std:c17 /Zi -fsanitize=undefined /Wall",
-        "CMAKE_CXX_FLAGS_DEBUG": "/std:c++20 /Wall /Zi"
+        "CMAKE_C_FLAGS_DEBUG": "/std:c23 /Zi -fsanitize=undefined /Wall"
       }
     },
     {
       "name": "x64-windows-release",
       "displayName": "x64 Release",
-      "inherits": [ "windows-default", "x64-release" ],
+      "inherits": [
+        "windows-default",
+        "x64-release"
+      ],
       "cacheVariables": {
-        "CMAKE_C_FLAGS_RELEASE": "/std:c17 /O2",
-        "CMAKE_CXX_FLAGS_RELEASE": "/std:c++20"
+        "CMAKE_C_FLAGS_RELEASE": "/std:c23 /O2"
       }
     },
     {
       "name": "x64-linux-debug",
       "displayName": "x64 Debug",
-      "inherits": [ "linux-default", "x64-debug" ],
+      "inherits": [
+        "linux-default",
+        "x64-debug"
+      ],
       "cacheVariables": {
-        "CMAKE_C_FLAGS_DEBUG": "-Wall -Wextra -pedantic -fms-extensions -g3 -ggdb3  -fsanitize=address -fsanitize=leak -fsanitize=undefined -fno-omit-frame-pointer",
-        "CMAKE_CXX_FLAGS_DEBUG": "-std=c++20 -Wall -Wextra -pedantic -g3 -ggdb3 -fsanitize=address -fsanitize=undefined"
+        "CMAKE_C_FLAGS_DEBUG": "-std=c2x -Wall -Wextra -pedantic -fms-extensions -g3 -ggdb3  -fsanitize=address -fsanitize=leak -fsanitize=undefined -fno-omit-frame-pointer"
       }
     },
     {
       "name": "x64-linux-release",
       "displayName": "x64 Release",
-      "inherits": [ "linux-default", "x64-release" ],
+      "inherits": [
+        "linux-default",
+        "x64-release"
+      ],
       "cacheVariables": {
-        "CMAKE_C_FLAGS_RELEASE": "-Wall -Wextra -pedantic -fms-extensions -O3",
-        "CMAKE_CXX_FLAGS_RELEASE": "-std=c++20"
+        "CMAKE_C_FLAGS_RELEASE": "-std=c2x -Wall -Wextra -pedantic -fms-extensions -O3"
       }
     }
   ],
@@ -153,7 +169,9 @@
     {
       "name": "default",
       "hidden": true,
-      "output": { "outputOnFailure": true },
+      "output": {
+        "outputOnFailure": true
+      },
       "execution": {
         "noTestsAction": "ignore",
         "stopOnFailure": false
